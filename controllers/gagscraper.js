@@ -11,7 +11,7 @@ var startScraper = function() {
   // Timer witch checks if there are new posts
   setInterval(function() {
     checkNewPosts(); // Function to start
-  }, 5000); // Every minute
+  }, 60000); // Every minute
 }
 //------------------------------------------------------------------------------
 
