@@ -11,7 +11,7 @@ var startScraper = function() {
   // Timer witch checks if there are new posts
   setInterval(function() {
     checkNewPosts(); // Function to start
-  }, 60000); // Every minute
+  }, 5*1000); // Every 5 minutes
 }
 //------------------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ var checkNewPosts = function() {
 
     // For every picture save its HREF link
     $("a").map(function() {
-      if(this.attribs.class === "badge-evt badge-track") { // If <a> class is image
+      if(this.attribs.class != 'undefined' && this.attribs.class === "badge-evt badge-track") { // If <a> class is image
         link[count] = removeSlashGag(this.attribs.href); // Saving it but without "/gag/"
         count++;
       }

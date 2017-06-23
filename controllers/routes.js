@@ -2,12 +2,16 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 
 var subscribe = require('./subscribe');
+var mysql = require('./mysql');
+var statData = require('./statdata');
 
 module.exports = function(app) {
 
 	// User requests home page
 	app.get('/', function(req, res) {
-		res.render('index');
+		statData(function(stats) {
+			res.render('index', {stats: stats});
+		});
 	});
 	//----------------------------------------------------------------------------
 
