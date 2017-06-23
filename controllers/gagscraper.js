@@ -2,6 +2,7 @@
 var express = require ('express');
 var cheerio = require('cheerio');
 var request = require('request');
+var mysql = require('./mysql');
 var app = express();
 //------------------------------------------------------------------------------
 
@@ -10,7 +11,7 @@ var startScraper = function() {
   // Timer witch checks if there are new posts
   setInterval(function() {
     checkNewPosts(); // Function to start
-  }, 60000); // Every minute
+  }, 5000); // Every minute
 }
 //------------------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ var checkNewPosts = function() {
       }
     });
 
-  
+    saveNewPosts(link);
 
   });
 }
@@ -45,6 +46,41 @@ function removeSlashGag(string) {
     newstring += string[i]; // Save it
   }
   return newstring; // Return new string
+}
+//------------------------------------------------------------------------------
+
+// Function for saving new posts
+var saveNewPosts = function(link) {
+  var check = [];
+  var date = require('moment')().format('YYYY-MM-DD');
+  var time = require('moment')().format('HH:mm:ss');
+
+  mysql("SELECT url FROM post WHERE date='" + date + "';", function(err, rows, fields) {
+    for(var i=0;i<link.length;i++) {
+      var temp = false;
+      for(var j=0;j<rows.length;j++) {
+        if(link[i] === rows[j].url) {
+          temp = true;
+          continue;
+        }
+      }
+      check[i] = temp;
+    }
+
+    var query = "INSERT INTO post (url, date, time) VALUES ";
+    for(var i=0;i<link.length;i++) {
+      if(check[i] == false) {
+        query += "('" + link[i] + "', '" + date + "', '" + time +"'),\n";
+        console.log("NEW " +  link[i]);
+      }
+    }
+    query = query.substring(0, query.length - 2);
+    if(query[query.length-1] != 'E') {
+      mysql(query + ';', function(err, rows, fields) {});
+    }
+
+  });
+
 }
 //------------------------------------------------------------------------------
 
