@@ -1,0 +1,26 @@
+Subscribe site:
+  (by order)
+
+  Title:
+    Gag Scraper
+
+  Text 1:
+    Bored of scrolling 9gag for hours ?
+    Subscribe to our mailing listand and recive 10 most upvoted posts on your email,
+    every day at 09:00 am (UTC +1)
+
+  ERR/INFO msg:
+    NEW SUB > INFO > "Your email is now on our subscribe list !"
+    DELETE SUB > INFO > "Your email is not anymore on our subscribe list !"
+    ERROR? > ERROR > "Error with database !"
+
+  Input box:
+    Enter mail...
+    BUTTON TEXT > "send"
+
+  Text 2:
+    To unsubscribe simply enter your email agine and click send.
+
+  Small text on bottom:
+    This project is open source, you can find code HERE.
+    HERE > link to github project

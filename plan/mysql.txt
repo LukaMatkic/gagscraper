@@ -1,0 +1,16 @@
+MySQL database structure:
+
+TABLE subscriber
+  id        INT           PK AI NN UN UQ
+  email     VARCHAR(256)  NN
+
+TABLE post
+  id        INT           PK AI NN UN UQ
+  url       VARCHAR(256)  NN
+  date      DATE          NN
+  time      TIME          NN
+
+TABLE scraps
+  id        INT           PK AI NN UN UQ
+  id_scrap  INT           NN UN
+  upvotes   INT(6)        NN UN
